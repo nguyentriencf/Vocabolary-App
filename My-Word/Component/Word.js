@@ -3,32 +3,44 @@ import {View, Text, StyleSheet, TouchableOpacity} from "react-native";
 import {connect} from 'react-redux'
 
  class Word extends Component {
-    getMimorizedWord(){
+    getMemorizedWord(){
        this.props.dispatch({
-           type: 'MIMORIZIED',
+           type: 'TOGGLE_MEMORIZIED',
            id:this.props.myWord.id
        });
-   }
+   };
+    toggleShowVn(){
+        this.props.dispatch({
+            type:'TOGGLE_SHOW',
+            id:this.props.myWord.id
+        })
+    }
+
     render() {
-        const {id, en, vn, memorized} = this.props.myWord;
+        const {id, en, vn, memorized,isShow} = this.props.myWord;
         const textDecorationLine = memorized ? 'line-through' : 'none';
+        const memorizedButtonText = memorized ? 'forget' : 'memorized'
+        const toggleShowButtonText = isShow ? 'hide' : 'show'
         return(
+            
             <View  style={Styles.container}>
                 <Text key={id} style={{textDecorationLine}}>
                     {en}
                 </Text>
-                <Text>
+               {isShow? <Text>
                     {vn}
-                </Text>
+                </Text> :null} 
                 <View style={Styles.controller}>
                     <TouchableOpacity 
                     style={Styles.button}
-                     onPress={this.getMimorizedWord.bind(this)}>
-                        <Text>Memorized</Text>
+                     onPress={this.getMemorizedWord.bind(this)}>
+                        <Text>{memorizedButtonText}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={Styles.button}>
+                    <TouchableOpacity 
+                    style={Styles.button}
+                    onPress={this.toggleShowVn.bind(this)}>
                         <Text>
-                            Show
+                          {toggleShowButtonText}
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -51,7 +63,7 @@ const Styles = StyleSheet.create({
     },
     button: {
         backgroundColor:'pink',
-        pading:10,
+        padding:10,
         margin:10
     }
 })
