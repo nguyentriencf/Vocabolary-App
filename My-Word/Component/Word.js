@@ -19,17 +19,16 @@ import {connect} from 'react-redux'
     render() {
         const {id, en, vn, memorized,isShow} = this.props.myWord;
         const textDecorationLine = memorized ? 'line-through' : 'none';
-        const memorizedButtonText = memorized ? 'forget' : 'memorized'
-        const toggleShowButtonText = isShow ? 'hide' : 'show'
+        const memorizedButtonText = memorized ? 'forget' : 'memorized';
+        const toggleShowButtonText = isShow ? 'hide' : 'show';
+        const vnText = isShow?vn:'------';
         return(
             
-            <View  style={Styles.container}>
-                <Text key={id} style={{textDecorationLine}}>
+            <View key={id}  style={Styles.container}>
+                <Text  style={{textDecorationLine}}>
                     {en}
                 </Text>
-               {isShow? <Text>
-                    {vn}
-                </Text> :null} 
+               <Text>{vnText}</Text>
                 <View style={Styles.controller}>
                     <TouchableOpacity 
                     style={Styles.button}

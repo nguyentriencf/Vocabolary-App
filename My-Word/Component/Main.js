@@ -8,6 +8,7 @@ import Form from "./Form";
  class Main extends Component {
       getWordList(){ 
           const{myFilter, myWords} = this.props;
+          
           if(myFilter ==='MEMORIED') return myWords.filter(e => e.memorized)
           if(myFilter ==='NEED_PRACTICE') return myWords.filter(e => !e.memorized)
           return myWords;        
@@ -18,9 +19,10 @@ import Form from "./Form";
                 <Header/>
                 <View style={{flex:10}}>
                     {this.props.myIsAdding? <Form/>:null}
-                     <FlatList data={this.getWordList()}
-                renderItem={({item})=><Word myWord={item}/>}
-                keyExtractor={item => item.id}/>
+                     <FlatList 
+                        data={this.getWordList()}
+                        renderItem={({item})=><Word myWord={item}/>}
+                        keyExtractor={item => item.id}/>
                 </View>
                 <Filter/>
             </View>
