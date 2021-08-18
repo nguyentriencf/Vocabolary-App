@@ -1,7 +1,7 @@
 import {  combineReducers } from "redux";
-import arrWordsReducer from "./reducer/arrWordsReducer";
-import filterStatusReducer from "./reducer/filterStatusReducer";
-import isAddingReducer from "./reducer/isAddingReducer";
+import arrWordsReducer from "./arrWordsReducer";
+import filterStatusReducer from "./filterStatusReducer";
+import isAddingReducer from "./isAddingReducer";
 const reducer = combineReducers({
   arrWords: arrWordsReducer,
   filterStatus: filterStatusReducer,

@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import {View,Text,TouchableOpacity, StyleSheet} from 'react-native'
 import {connect} from 'react-redux'
+import {toggleIsAdding} from './Redux/reducer/actionCreators';
 
  class Header extends Component{
-    toggleisAdding(){
-        this.props.dispatch({
-            type:'TOGGLE_IS_ADDING'
-        })
-    }
     render(){
         return(
             <View style={styles.header}>
@@ -15,14 +11,16 @@ import {connect} from 'react-redux'
                     <Text>
                         My word
                     </Text>
-                    <TouchableOpacity onPress={()=>this.toggleisAdding()}>
+                    <TouchableOpacity onPress={()=>this.props.toggleIsAdding()}>
                     <Text>+</Text>
                     </TouchableOpacity>
             </View> 
         )
     }
 }
-export default connect()(Header)
+
+// tham số thứ 2 là mapActiontoProps
+export default connect(null, {toggleIsAdding})(Header)
 
 const styles= StyleSheet.create({
     header: {
