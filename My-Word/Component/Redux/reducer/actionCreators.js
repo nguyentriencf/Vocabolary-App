@@ -11,5 +11,16 @@ export function addWord(en,vn){
     en,
     vn
   };
-
+}
+export function toggleMemorized(id) {
+  return {
+    type: "TOGGLE_MEMORIZIED",
+    id,
+  };
+}
+export function toggleShow(id) {
+  return {
+    type: "TOGGLE_SHOW",
+    id,
+  };
 }
