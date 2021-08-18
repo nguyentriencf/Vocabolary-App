@@ -1,6 +1,11 @@
 import React, { Component } from "react";
-import {View,Text,TouchableOpacity, StyleSheet} from "react-native"
-import {connect} from 'react-redux'
+import {View,Text,TouchableOpacity, StyleSheet} from "react-native";
+import {connect} from 'react-redux';
+import {
+  showAll,
+  showMemorized,
+  showNeedPractice,
+} from "./Redux/reducer/actionCreators";
 
  class Filter extends Component {
         getTextStyle(statusName) {
@@ -16,25 +21,19 @@ import {connect} from 'react-redux'
         */
     }
 render(){
-    return(
-            <View style={styles.container}>
-                <TouchableOpacity onPress={()=> this.setFilterStatus('FILTER_SHOW_ALL')}>
-                    <Text style={this.getTextStyle('SHOW_ALL')}>
-                        Show All
-                    </Text>
-                </TouchableOpacity >
-                    <TouchableOpacity onPress={()=> this.setFilterStatus('FILTER_MEMORIED')}>
-                    <Text style={this.getTextStyle('MEMORIED')}>
-                        Memoried
-                    </Text>
-                </TouchableOpacity>
-                    <TouchableOpacity onPress={()=> this.setFilterStatus('FILTER_NEED_PRACTICE')}>
-                    <Text style={this.getTextStyle('NEED_PRACTICE')}>
-                        Need Practice
-                    </Text>
-                </TouchableOpacity>
-            </View>
-    )
+    return (
+      <View style={styles.container}>
+        <TouchableOpacity onPress={() => this.props.showAll()}>
+          <Text style={this.getTextStyle("SHOW_ALL")}>Show All</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => this.props.showMemorized()}>
+          <Text style={this.getTextStyle("MEMORIED")}>Memoried</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => this.props.showNeedPractice()}>
+          <Text style={this.getTextStyle("NEED_PRACTICE")}>Need Practice</Text>
+        </TouchableOpacity>
+      </View>
+    );
 }
 }
 
@@ -44,7 +43,10 @@ function mapStateProps(state) {
     }
 }
 
-export default connect(mapStateProps)(Filter)
+export default connect(
+  mapStateProps,
+  { showAll, showMemorized, showNeedPractice }
+)(Filter);
 
 const styles = StyleSheet.create({
 container: {
